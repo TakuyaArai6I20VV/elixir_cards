@@ -12,7 +12,34 @@ defmodule ElixirCards do
       :world
 
   """
-  def hello do
-    "Hello, world!"
+  def create_deck do
+    values = ["Ace", "Two", "Three", "Four", "Five"]
+    suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
+
+    # cards = for value <- values do
+    #   for suit <- suits do
+    #     "#{value} of #{suit}"
+    #   end
+    # end
+
+    # List.flatten(cards)
+    for value <- values, suit <- suits do
+      "#{value} of #{suit}"
+    end
+  end
+
+  @spec shuffle(list()) :: list()
+  def shuffle(deck) do
+    Enum.shuffle(deck)
+  end
+
+  @spec contains?(list(), any()) :: boolean()
+  def contains?(deck, card) do
+    Enum.member?(deck, card)
+  end
+
+  @spec deal(any(), integer()) :: {list(), list()}
+  def deal(deck, hand_size) do
+    Enum.split(deck, hand_size)
   end
 end
